@@ -377,6 +377,8 @@
 // ============================================================
 const API_BASE = 'https://sumative-scan-goo-project-2.onrender.com';
 
+
+
 // ============================================================
 // SECURITY — XSS escape
 // ============================================================
@@ -689,8 +691,6 @@ async function handleSupermarketAdminLogin() {
     if (!['admin','superadmin'].includes(data.user.role)) throw new Error('This account does not have admin access.');
     saveAuth(data.token, data.user);
     userRole = data.user.role;
-    const nameEl = document.getElementById('dashboard-supermarket-name');
-    if (nameEl && data.user.supermarketName) nameEl.textContent = data.user.supermarketName;
     await loadProducts();
     await loadAdminDashboard();
     startAdminPolling();
@@ -858,6 +858,7 @@ async function addSupermarket() {
       password,
       name: `Admin - ${name}`,
       supermarketId: supermarketData.supermarket._id,
+      supermarketName: name,
       role: 'admin'
     });
     
@@ -951,6 +952,10 @@ function stopAdminPolling() {
 
 async function loadAdminDashboard() {
   try {
+    // Always update the dashboard title from the current user
+    const nameEl = document.getElementById('dashboard-supermarket-name');
+    if (nameEl && currentUser?.supermarketName) nameEl.textContent = currentUser.supermarketName;
+
     const [kpiRes, liveRes, completedRes, alertsRes, invRes] = await Promise.all([
       api('GET', '/api/sessions/admin/kpis'),
       api('GET', '/api/sessions/admin/live'),
@@ -1123,15 +1128,13 @@ function filterStores() {
   }
 }
 
-function selectSupermarket(storeId) {
+async function selectSupermarket(storeId) {
   currentSupermarket = allStores.find(s => s._id === storeId);
-  if (currentSupermarket) {
-    localStorage.setItem('sg_store', JSON.stringify(currentSupermarket));
-    showToast(`🛒 Shopping at ${currentSupermarket.name}`);
-    startShopping();
-  } else {
-    showToast('Store not found');
-  }
+  if (!currentSupermarket) { showToast('Store not found'); return; }
+  localStorage.setItem('sg_store', JSON.stringify(currentSupermarket));
+  showToast(`🛒 Shopping at ${currentSupermarket.name}`);
+  await ensureSession(currentSupermarket._id);
+  startShopping();
 }
 
 function updateUserAvatar() {
@@ -1186,12 +1189,16 @@ function submitManualBarcode() {
 // ============================================================
 // SESSION
 // ============================================================
-async function ensureSession() {
+async function ensureSession(supermarketId) {
   try {
     const d = await api('GET', '/api/sessions/mine');
     currentSession = d.session;
+    // If the existing session belongs to a different supermarket, start a fresh one
+    if (supermarketId && currentSession?.supermarketId?.toString() !== supermarketId.toString()) {
+      throw new Error('wrong supermarket');
+    }
   } catch {
-    const d = await api('POST', '/api/sessions/start');
+    const d = await api('POST', '/api/sessions/start', supermarketId ? { supermarketId } : {});
     currentSession = d.session;
   }
   syncCartFromSession();
@@ -1396,7 +1403,7 @@ async function processPayment() {
 
 async function resetAndGoHome() {
   try {
-    const d = await api('POST', '/api/sessions/start');
+    const d = await api('POST', '/api/sessions/start', currentSupermarket ? { supermarketId: currentSupermarket._id } : {});
     currentSession = d.session;
   } catch(e) {
     currentSession = null;
