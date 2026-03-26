@@ -13,11 +13,11 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => console.error('❌ MongoDB connection error:', err.message));
 
 // ------------------- ROUTES -------------------
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/sessions', require('./routes/sessions'));
-app.use('/api/products', require('./routes/products'));
-app.use('/api/supermarkets', require('./routes/supermarkets'));
-app.use('/api/alerts', require('./routes/alerts'));
+app.use('/api/auth', require('../routes/auth'));
+app.use('/api/sessions', require('../routes/sessions'));
+app.use('/api/products', require('../routes/products'));
+app.use('/api/supermarkets', require('../routes/supermarkets'));
+app.use('/api/alerts', require('../routes/alerts'));
 
 app.get('/', (req, res) => res.send('Server running!'));
 
