@@ -23,33 +23,23 @@
         .btn-teal:hover { background-color: #004a52; transform: translateY(-2px); box-shadow: var(--shadow-sm); }
         .btn-green { background-color: var(--primary-green); color: white; padding: 14px; border-radius: 12px; width: 100%; font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; }
         .btn-green:hover { background-color: var(--primary-green-dark); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-        .btn-green:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
         .btn-red { background-color: #ff3b5c; color: white; padding: 10px 16px; border-radius: 10px; font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn-red:hover { background-color: #e02e4e; transform: translateY(-1px); }
         .btn-outline { background: transparent; border: 2px solid var(--primary-green); color: var(--primary-green); padding: 12px; border-radius: 12px; font-weight: 600; transition: all 0.2s; cursor: pointer; }
         .scanner-viewport { height: 300px; background: linear-gradient(135deg, #111 0%, #1a1a1a 100%); border: 2px solid var(--primary-green); position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
         .scanner-line { position: absolute; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, var(--primary-green), transparent); top: 0; animation: scan 2s infinite linear; box-shadow: 0 0 12px var(--primary-green); }
         @keyframes scan { 0% { top: 0; opacity: 0.5; } 50% { top: 100%; opacity: 1; } 100% { top: 0; opacity: 0.5; } }
-        .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #1f2937; color: white; padding: 12px 24px; border-radius: 50px; z-index: 1001; animation: fadeInOut 2.5s ease; font-size: 14px; font-weight: 500; white-space: nowrap; box-shadow: var(--shadow-md); z-index: 10000; }
+        .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #1f2937; color: white; padding: 12px 24px; border-radius: 50px; z-index: 1001; animation: fadeInOut 2.5s ease; font-size: 14px; font-weight: 500; white-space: nowrap; box-shadow: var(--shadow-md); }
         @keyframes fadeInOut { 0% { opacity: 0; transform: translateX(-50%) translateY(20px); } 15% { opacity: 1; transform: translateX(-50%) translateY(0); } 85% { opacity: 1; transform: translateX(-50%) translateY(0); } 100% { opacity: 0; transform: translateX(-50%) translateY(20px); } }
         .cart-items-scroll { max-height: 50vh; overflow-y: auto; padding-right: 4px; }
-        .supermarket-card { background: white; border-radius: 16px; padding: 16px; margin-bottom: 12px; box-shadow: var(--shadow-sm); transition: all 0.2s; cursor: pointer; border: 1px solid #e5e7eb; }
-        .supermarket-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--primary-green); }
+        /* FLOATING CART BUTTON REMOVED - no styles needed */
+        .supermarket-card { background: white; border-radius: 16px; padding: 16px; margin-bottom: 12px; box-shadow: var(--shadow-sm); transition: all 0.2s; cursor: pointer; }
+        .supermarket-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
         .transaction-item { border-left: 3px solid var(--primary-green); padding: 12px; margin-bottom: 8px; background: #f9f9f9; border-radius: 8px; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; }
         .modal.active { display: flex; }
         .modal-content { background: white; border-radius: 24px; padding: 24px; width: 90%; max-width: 400px; max-height: 90vh; overflow-y: auto; }
         .platform-login-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 24px; padding: 32px; text-align: center; }
-        .loading-spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(0,0,0,.1); border-radius: 50%; border-top-color: var(--primary-green); animation: spin 1s ease-in-out infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .input-error { border-color: #ff3b5c !important; background-color: #fff5f5 !important; }
-        .error-message { color: #ff3b5c; font-size: 12px; margin-top: 4px; display: block; }
-        .password-strength { height: 4px; background: #e5e7eb; border-radius: 2px; margin-top: 8px; overflow: hidden; }
-        .password-strength-bar { height: 100%; width: 0%; transition: width 0.3s, background-color 0.3s; }
-        .strength-weak { width: 33%; background-color: #ff3b5c; }
-        .strength-medium { width: 66%; background-color: #ffa500; }
-        .strength-strong { width: 100%; background-color: #00C566; }
-        .admin-credentials-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 12px; margin-top: 12px; }
-        .admin-credentials-card p { color: white; font-size: 12px; margin: 4px 0; }
     </style>
 </head>
 <body>
@@ -63,28 +53,27 @@
             <h1 class="text-4xl font-bold bg-gradient-to-r from-[#005a64] to-[#00C566] bg-clip-text text-transparent">SCAN&GOO</h1>
             <p class="text-gray-500 mt-2">Complete Management System</p>
         </div>
-
+        
         <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
             <div class="flex gap-2 mb-6">
                 <button id="shopper-tab" class="flex-1 bg-[#005a64] text-white px-4 py-2 rounded-xl text-sm font-semibold transition">Shopper</button>
                 <button id="admin-tab" class="flex-1 bg-gray-100 px-4 py-2 rounded-xl text-sm font-semibold transition">Admin</button>
                 <button id="platform-tab" class="flex-1 bg-gray-100 px-4 py-2 rounded-xl text-sm font-semibold transition">Platform</button>
             </div>
-
+            
             <!-- Shopper Login -->
             <div id="shopper-login">
                 <div id="shopper-error" style="display:none;" class="text-red-500 text-sm bg-red-50 p-3 rounded-xl mb-3"></div>
                 <div id="shopper-register" style="display:none;">
-                    <input type="text" id="reg-name" placeholder="Full Name *" class="w-full p-3 border border-gray-200 rounded-xl mb-3 bg-gray-50">
-                    <input type="tel" id="reg-phone" placeholder="Phone (e.g., 0781234567) *" class="w-full p-3 border border-gray-200 rounded-xl mb-3 bg-gray-50">
-                    <p class="text-xs text-gray-400 -mt-2 mb-2">Rwandan number format: 07XXXXXXXX</p>
+                    <input type="text" id="reg-name" placeholder="Full Name" class="w-full p-3 border border-gray-200 rounded-xl mb-3 bg-gray-50">
+                    <input type="tel" id="reg-phone" placeholder="Phone (+250...)" class="w-full p-3 border border-gray-200 rounded-xl mb-3 bg-gray-50">
                 </div>
-                <input type="email" id="login-email" placeholder="Email address *" class="w-full p-3 border border-gray-200 rounded-xl mb-3 bg-gray-50">
-                <input type="password" id="login-password" placeholder="Password (min 6 characters) *" class="w-full p-3 border border-gray-200 rounded-xl mb-4 bg-gray-50">
+                <input type="email" id="login-email" placeholder="Email address" class="w-full p-3 border border-gray-200 rounded-xl mb-3 bg-gray-50">
+                <input type="password" id="login-password" placeholder="Password" class="w-full p-3 border border-gray-200 rounded-xl mb-4 bg-gray-50">
                 <button id="shopper-login-btn" onclick="handleShopperLogin()" class="btn-green mb-2">Sign In as Shopper</button>
                 <button onclick="toggleRegister()" id="toggle-reg-btn" class="w-full text-sm text-[#005a64] font-semibold py-2">Don't have an account? Register →</button>
             </div>
-
+            
             <!-- Supermarket Admin Login -->
             <div id="admin-login" style="display:none;">
                 <div class="platform-login-card">
@@ -99,7 +88,7 @@
                     <button onclick="handleSupermarketAdminLogin()" class="w-full bg-white text-purple-600 font-bold py-3 rounded-xl hover:bg-gray-100 transition">Access Dashboard →</button>
                 </div>
             </div>
-
+            
             <!-- Platform Owner Login -->
             <div id="platform-login" style="display:none;">
                 <div class="platform-login-card">
@@ -146,35 +135,15 @@
             </div>
         </div>
 
-        <!-- Add New Supermarket with Admin Password -->
+        <!-- Add New Supermarket -->
         <div class="bg-white rounded-xl p-4 shadow-sm mb-6">
             <h3 class="font-bold mb-3 flex items-center gap-2"><span>🏪</span> Register New Supermarket</h3>
             <div id="platform-add-error" style="display:none;" class="text-red-500 text-sm bg-red-50 p-3 rounded-xl mb-3"></div>
-            <input type="text" id="new-sup-name" placeholder="Supermarket Name *" class="w-full p-3 border border-gray-200 rounded-xl mb-2 bg-gray-50">
+            <input type="text" id="new-sup-name" placeholder="Supermarket Name" class="w-full p-3 border border-gray-200 rounded-xl mb-2 bg-gray-50">
             <input type="text" id="new-sup-location" placeholder="Location (e.g. Remera, Kigali)" class="w-full p-3 border border-gray-200 rounded-xl mb-2 bg-gray-50">
-            <input type="email" id="new-sup-email" placeholder="Admin Email *" class="w-full p-3 border border-gray-200 rounded-xl mb-2 bg-gray-50">
+            <input type="email" id="new-sup-email" placeholder="Contact Email" class="w-full p-3 border border-gray-200 rounded-xl mb-2 bg-gray-50">
             <input type="tel" id="new-sup-phone" placeholder="Phone Number" class="w-full p-3 border border-gray-200 rounded-xl mb-3 bg-gray-50">
-            
-            <!-- Admin Password Fields -->
-            <div class="mb-3">
-                <input type="password" id="new-sup-password" placeholder="Admin Password * (min 6 characters)" class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50" oninput="checkPasswordStrength()">
-                <div class="password-strength mt-2">
-                    <div class="password-strength-bar" id="password-strength-bar"></div>
-                </div>
-                <p class="text-xs text-gray-400 mt-1" id="password-strength-text">Password strength: Not set</p>
-            </div>
-            
-            <div class="mb-3">
-                <input type="password" id="new-sup-confirm-password" placeholder="Confirm Password *" class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50">
-            </div>
-            
             <button onclick="addSupermarket()" id="add-sup-btn" class="btn-green w-full">Register Supermarket →</button>
-            
-            <div class="admin-credentials-card" id="credentials-info" style="display:none;">
-                <p class="text-white text-center">📋 After registration, admin can login with:</p>
-                <p class="text-white text-center font-mono text-xs mt-1" id="cred-email"></p>
-                <p class="text-white text-center font-mono text-xs" id="cred-password"></p>
-            </div>
         </div>
 
         <h3 class="font-bold mb-3">📋 Registered Supermarkets</h3>
@@ -257,7 +226,7 @@
         </div>
     </div>
 
-    <!-- STORE SELECTION (Shopper) - Same as before -->
+    <!-- STORE SELECTION (Shopper) -->
     <div id="screen-stores" class="screen p-6">
         <div class="flex justify-between items-center mb-6">
             <div>
@@ -266,52 +235,36 @@
             </div>
             <div class="w-10 h-10 bg-gradient-to-br from-[#005a64] to-[#00C566] rounded-full flex items-center justify-center text-white font-bold shadow-md" id="user-avatar">👤</div>
         </div>
-
+        
         <div class="relative mb-6">
             <input type="text" id="store-search" placeholder="Search for a supermarket..." class="w-full p-4 bg-gray-100 rounded-2xl pl-12" oninput="filterStores()">
             <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-xl">🔍</span>
         </div>
-
-        <div class="flex justify-between items-center mb-4">
-            <h3 class="font-bold text-lg">Available Supermarkets</h3>
-            <button onclick="logout()" class="text-red-500 text-sm font-semibold">Logout</button>
-        </div>
-        <div id="supermarkets-list" class="space-y-3 mb-8">
-            <div class="text-center py-8 text-gray-500">
-                <div class="loading-spinner mb-2"></div>
-                <p>Loading supermarkets...</p>
-            </div>
-        </div>
+        
+        <h3 class="font-bold text-lg mb-4">Available Supermarkets</h3>
+        <div id="supermarkets-list" class="space-y-3 mb-8"></div>
     </div>
 
-    <!-- SCANNER, CART, CHECKOUT, SUCCESS screens remain the same -->
-    <!-- [Previous scanner, cart, checkout, success screens here - keeping them for brevity] -->
+    <!-- SCANNER -->
     <div id="screen-scan" class="screen bg-black">
         <div class="p-4 bg-white flex justify-between items-center shadow-md">
             <button onclick="navTo('screen-stores')" class="text-gray-600 text-2xl">←</button>
             <span class="font-bold text-xl text-[#005a64]">SCAN&GOO</span>
             <span class="bg-green-100 px-3 py-1 rounded-full text-sm font-bold text-[#00C566]">RWF <span id="cart-total">0</span></span>
         </div>
-
+        
         <div class="scanner-viewport mt-8 mx-6 relative">
             <div class="scanner-line"></div>
             <div class="absolute inset-0 flex items-center justify-center">
                 <div class="text-center text-white">
                     <div class="text-6xl mb-3 animate-pulse">📷</div>
-                    <p class="text-sm font-semibold">Tap a product below to add it</p>
-                    <p class="text-xs text-gray-400 mt-2">Camera scanning coming soon</p>
+                    <p class="text-sm font-semibold">Position barcode within the frame</p>
+                    <p class="text-xs text-gray-400 mt-2">Tap products below to simulate scanning</p>
                 </div>
             </div>
         </div>
 
-        <div class="mx-6 mt-4">
-            <div class="flex gap-2">
-                <input type="text" id="manual-barcode" placeholder="Enter barcode manually..." class="flex-1 p-3 bg-gray-800 text-white rounded-xl border border-gray-600 placeholder-gray-500 text-sm">
-                <button onclick="submitManualBarcode()" class="bg-[#00C566] text-white px-4 py-3 rounded-xl font-semibold text-sm">Add</button>
-            </div>
-        </div>
-
-        <div class="mx-6 mt-6">
+        <div class="mx-6 mt-8">
             <h3 class="text-white text-sm font-semibold mb-3">⭐ Quick Add Products</h3>
             <div class="grid grid-cols-2 gap-3" id="demo-products"></div>
         </div>
@@ -328,19 +281,37 @@
         </div>
     </div>
 
+    <!-- CART -->
     <div id="screen-cart" class="screen p-6">
         <div class="flex items-center mb-6">
             <button onclick="navTo('screen-scan')" class="text-gray-600 mr-4 text-2xl">←</button>
             <h2 class="text-2xl font-bold flex-1">My Cart</h2>
             <button onclick="clearCart()" class="text-red-500 text-sm font-semibold">Clear All</button>
         </div>
-        <div id="cart-items-list" class="cart-items-scroll space-y-3 mb-6"></div>
+        
+        <div id="cart-items-list" class="cart-items-scroll space-y-3 mb-6">
+            <div class="text-center text-gray-400 py-12">
+                <div class="text-6xl mb-4">🛒</div>
+                <p class="text-lg font-medium">Your cart is empty</p>
+                <button onclick="startShopping()" class="mt-6 text-[#00C566] font-semibold underline">Start Shopping →</button>
+            </div>
+        </div>
+
         <div id="cart-summary" style="display:none;">
             <div class="bg-gradient-to-r from-gray-50 to-white rounded-2xl p-5 mb-5">
                 <div class="space-y-3">
-                    <div class="flex justify-between"><p class="text-gray-600">Subtotal</p><p class="font-bold" id="cart-subtotal">0 RWF</p></div>
-                    <div class="flex justify-between"><p class="text-gray-600">Total Weight</p><p class="text-gray-700" id="cart-weight">0 kg</p></div>
-                    <div class="flex justify-between pt-2 border-t"><p class="text-xl font-bold">Total</p><p class="text-2xl font-bold text-[#00C566]" id="cart-grand-total">0 RWF</p></div>
+                    <div class="flex justify-between">
+                        <p class="text-gray-600">Subtotal</p>
+                        <p class="font-bold" id="cart-subtotal">0 RWF</p>
+                    </div>
+                    <div class="flex justify-between">
+                        <p class="text-gray-600">Total Weight</p>
+                        <p class="text-gray-700" id="cart-weight">0 kg</p>
+                    </div>
+                    <div class="flex justify-between pt-2 border-t">
+                        <p class="text-xl font-bold">Total</p>
+                        <p class="text-2xl font-bold text-[#00C566]" id="cart-grand-total">0 RWF</p>
+                    </div>
                 </div>
             </div>
             <div class="space-y-3">
@@ -350,24 +321,65 @@
         </div>
     </div>
 
+    <!-- CHECKOUT -->
     <div id="screen-checkout" class="screen p-6">
-        <div class="flex items-center mb-6"><button onclick="navTo('screen-cart')" class="text-gray-600 mr-4 text-2xl">←</button><h2 class="text-2xl font-bold">Checkout</h2></div>
-        <div class="bg-gray-50 rounded-2xl p-5 mb-6"><h3 class="font-bold mb-3">Order Summary</h3><div id="checkout-items"></div><div class="border-t pt-3 mt-3"><div class="flex justify-between font-bold"><span>Total</span><span class="text-[#00C566]" id="checkout-total">0 RWF</span></div></div></div>
+        <div class="flex items-center mb-6">
+            <button onclick="navTo('screen-cart')" class="text-gray-600 mr-4 text-2xl">←</button>
+            <h2 class="text-2xl font-bold">Checkout</h2>
+        </div>
+        <div class="bg-gray-50 rounded-2xl p-5 mb-6">
+            <h3 class="font-bold mb-3">Order Summary</h3>
+            <div id="checkout-items"></div>
+            <div class="border-t pt-3 mt-3">
+                <div class="flex justify-between font-bold">
+                    <span>Total</span>
+                    <span class="text-[#00C566]" id="checkout-total">0 RWF</span>
+                </div>
+            </div>
+        </div>
         <h3 class="font-bold mb-3">Payment Method</h3>
         <div class="space-y-3 mb-6">
-            <div class="payment-option border-2 border-[#00C566] p-4 rounded-xl flex items-center justify-between cursor-pointer bg-green-50" onclick="selectPayment('momo', this)"><div class="flex items-center gap-3"><div class="w-12 h-12 bg-yellow-500 rounded-xl flex items-center justify-center">📱</div><div><p class="font-bold">MTN Mobile Money</p></div></div><div class="payment-dot w-6 h-6 rounded-full bg-[#00C566]"></div></div>
-            <div class="payment-option border p-4 rounded-xl flex items-center justify-between cursor-pointer" onclick="selectPayment('airtel', this)"><div class="flex items-center gap-3"><div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center">📲</div><div><p class="font-bold">Airtel Money</p></div></div><div class="payment-dot w-6 h-6 rounded-full border-2 border-gray-300"></div></div>
-            <div class="payment-option border p-4 rounded-xl flex items-center justify-between cursor-pointer" onclick="selectPayment('cash', this)"><div class="flex items-center gap-3"><div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">💵</div><div><p class="font-bold">Cash at Counter</p></div></div><div class="payment-dot w-6 h-6 rounded-full border-2 border-gray-300"></div></div>
+            <div class="payment-option border-2 border-[#00C566] p-4 rounded-xl flex items-center justify-between cursor-pointer bg-green-50" onclick="selectPayment('momo', this)">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-yellow-500 rounded-xl flex items-center justify-center">📱</div>
+                    <div><p class="font-bold">MTN Mobile Money</p></div>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-[#00C566]"></div>
+            </div>
+            <div class="payment-option border p-4 rounded-xl flex items-center justify-between cursor-pointer" onclick="selectPayment('airtel', this)">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center">📲</div>
+                    <div><p class="font-bold">Airtel Money</p></div>
+                </div>
+                <div class="w-6 h-6 rounded-full border-2 border-gray-300"></div>
+            </div>
+            <div class="payment-option border p-4 rounded-xl flex items-center justify-between cursor-pointer" onclick="selectPayment('cash', this)">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">💵</div>
+                    <div><p class="font-bold">Cash at Counter</p></div>
+                </div>
+                <div class="w-6 h-6 rounded-full border-2 border-gray-300"></div>
+            </div>
         </div>
-        <input type="tel" id="payment-phone" placeholder="Phone e.g. 0781234567" pattern="^07[0-9]{8}$" class="w-full p-4 border rounded-xl mb-1 bg-gray-50">
-        <p class="text-xs text-gray-400 mb-4">Enter your MTN/Airtel number (10 digits starting with 07)</p>
+        <input type="tel" id="payment-phone" placeholder="Phone number" class="w-full p-4 border rounded-xl mb-4 bg-gray-50">
         <button onclick="processPayment()" class="btn-green py-4">Pay Now →</button>
     </div>
 
+    <!-- SUCCESS -->
     <div id="screen-success" class="screen p-8 text-center bg-white">
         <div class="w-24 h-24 bg-green-500 text-white rounded-full flex items-center justify-center text-5xl mx-auto mt-12 mb-6">✓</div>
         <h2 class="text-2xl font-bold mb-2">Payment Successful!</h2>
-        <div class="bg-gray-900 p-6 rounded-3xl inline-block mb-6"><div class="bg-white p-4 rounded-2xl"><div class="w-48 h-48 bg-gray-800 rounded-xl flex items-center justify-center"><div class="text-center"><div class="text-4xl mb-2">📱</div><div class="text-white bg-green-600 px-2 py-1 rounded-full text-xs">EXIT CODE</div><div class="text-white font-bold text-sm mt-2" id="receipt-code">SG-XXXX</div></div></div></div></div>
+        <div class="bg-gray-900 p-6 rounded-3xl inline-block mb-6">
+            <div class="bg-white p-4 rounded-2xl">
+                <div class="w-48 h-48 bg-gray-800 rounded-xl flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">📱</div>
+                        <div class="text-white bg-green-600 px-2 py-1 rounded-full text-xs">EXIT CODE</div>
+                        <div class="text-white font-bold text-sm mt-2" id="receipt-code">SG-XXXX</div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <button onclick="resetAndGoHome()" class="text-[#005a64] font-bold">← Back to Home</button>
     </div>
 
@@ -375,19 +387,7 @@
 // ============================================================
 // CONFIG
 // ============================================================
-const API_BASE = 'http://localhost:3000';
-
-// ============================================================
-// SECURITY — XSS escape
-// ============================================================
-function esc(str) {
-  return String(str == null ? '' : str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
+const API_BASE = 'https://scan-goo-api.onrender.com';
 
 // ============================================================
 // STATE
@@ -397,127 +397,45 @@ let cart = [], selectedPayment = 'momo', userRole = null;
 let currentSupermarket = null, allStores = [], PRODUCTS = [];
 let adminPollInterval = null;
 let isRegistering = false;
-let cartSyncing = false;
-
-// Password strength checker
-function checkPasswordStrength() {
-    const password = document.getElementById('new-sup-password').value;
-    const bar = document.getElementById('password-strength-bar');
-    const text = document.getElementById('password-strength-text');
-    
-    if (!password) {
-        bar.className = 'password-strength-bar';
-        bar.style.width = '0%';
-        text.textContent = 'Password strength: Not set';
-        return;
-    }
-    
-    let strength = 0;
-    if (password.length >= 6) strength++;
-    if (password.length >= 8) strength++;
-    if (/[A-Z]/.test(password)) strength++;
-    if (/[0-9]/.test(password)) strength++;
-    if (/[^A-Za-z0-9]/.test(password)) strength++;
-    
-    if (strength <= 2) {
-        bar.className = 'password-strength-bar strength-weak';
-        text.textContent = 'Password strength: Weak';
-        text.style.color = '#ff3b5c';
-    } else if (strength <= 4) {
-        bar.className = 'password-strength-bar strength-medium';
-        text.textContent = 'Password strength: Medium';
-        text.style.color = '#ffa500';
-    } else {
-        bar.className = 'password-strength-bar strength-strong';
-        text.textContent = 'Password strength: Strong';
-        text.style.color = '#00C566';
-    }
-}
 
 // ── Auth persistence ──────────────────────────────────────
 function restoreAuth() {
   const t = localStorage.getItem('sg_token');
   const u = localStorage.getItem('sg_user');
-  if (t && u) {
-    try {
-      authToken = t;
-      currentUser = JSON.parse(u);
-      userRole = currentUser.role;
-      return true;
-    } catch {
-      clearAuthData();
-      return false;
-    }
-  }
+  if (t && u) { authToken = t; currentUser = JSON.parse(u); return true; }
   return false;
 }
-
 function saveAuth(token, user) {
-  authToken = token; 
-  currentUser = user;
-  userRole = user.role;
+  authToken = token; currentUser = user;
   localStorage.setItem('sg_token', token);
   localStorage.setItem('sg_user', JSON.stringify(user));
 }
-
 function clearAuthData() {
-  authToken = null; 
-  currentUser = null; 
-  currentSession = null; 
-  cart = []; 
-  userRole = null;
-  localStorage.removeItem('sg_token');
-  localStorage.removeItem('sg_user');
-  localStorage.removeItem('sg_store');
+  authToken = null; currentUser = null; currentSession = null; cart = []; userRole = null;
+  localStorage.removeItem('sg_token'); localStorage.removeItem('sg_user');
 }
 
 // ── API helper ────────────────────────────────────────────
 async function api(method, path, body) {
   const opts = {
     method,
-    headers: {
-      'Content-Type': 'application/json',
-      ...(authToken ? { Authorization: 'Bearer ' + authToken } : {})
-    }
+    headers: { 'Content-Type': 'application/json', ...(authToken ? { Authorization: 'Bearer ' + authToken } : {}) }
   };
   if (body) opts.body = JSON.stringify(body);
-  
-  try {
-    const res = await fetch(API_BASE + path, opts);
-    const data = await res.json();
-    
-    if (res.status === 401) {
-      clearAuthData();
-      navTo('screen-login');
-      showToast('Session expired. Please log in again.');
-      throw new Error('Unauthorized');
-    }
-    
-    if (!res.ok) {
-      const errorMsg = data.message || data.error || 'Request failed';
-      throw new Error(errorMsg);
-    }
-    
-    return data;
-  } catch (error) {
-    console.error('API Error:', error);
-    throw error;
-  }
+  const res = await fetch(API_BASE + path, opts);
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Request failed');
+  return data;
 }
 
 // ============================================================
 // INIT
 // ============================================================
 window.addEventListener('DOMContentLoaded', () => {
+  // Floating cart button removed - no longer added
   setupTabs();
   if (restoreAuth()) {
     routeByRole(currentUser.role);
-  }
-});
-
-document.addEventListener('visibilitychange', () => {
-  if (!document.hidden && userRole === 'admin' && document.getElementById('screen-supermarket-dashboard').classList.contains('active-screen')) {
-    startAdminPolling();
   }
 });
 
@@ -528,8 +446,7 @@ async function routeByRole(role) {
       navTo('screen-platform-dashboard');
     } else if (role === 'admin') {
       await loadProducts();
-      await loadAdminDashboard();
-      startAdminPolling();
+      await rahJ91ZuNL8Y2px8iYciYeHN8sfSh5eXH8();
       navTo('screen-supermarket-dashboard');
     } else {
       await loadProducts();
@@ -537,18 +454,11 @@ async function routeByRole(role) {
       await loadStores();
       updateUserAvatar();
       const saved = localStorage.getItem('sg_store');
-      if (saved) {
-        try { currentSupermarket = JSON.parse(saved); } catch { currentSupermarket = null; }
-      }
+      if (saved) { currentSupermarket = JSON.parse(saved); }
       renderSupermarketsList();
       navTo('screen-stores');
     }
-  } catch(e) {
-    console.error('Route error:', e);
-    if (e.message !== 'Unauthorized') {
-      showToast('Error: ' + e.message);
-    }
-  }
+  } catch(e) { clearAuthData(); navTo('screen-login'); }
 }
 
 // ============================================================
@@ -556,9 +466,9 @@ async function routeByRole(role) {
 // ============================================================
 function setupTabs() {
   const tabs = [
-    { btn: 'shopper-tab',  panel: 'shopper-login'  },
-    { btn: 'admin-tab',    panel: 'admin-login'     },
-    { btn: 'platform-tab', panel: 'platform-login'  }
+    { btn: 'shopper-tab', panel: 'shopper-login' },
+    { btn: 'admin-tab',   panel: 'admin-login'   },
+    { btn: 'platform-tab',panel: 'platform-login' }
   ];
   tabs.forEach(({ btn, panel }) => {
     const el = document.getElementById(btn);
@@ -585,9 +495,8 @@ function toggleRegister() {
   document.getElementById('toggle-reg-btn').textContent = isRegistering
     ? 'Already have an account? Login →'
     : "Don't have an account? Register →";
-  const btn = document.getElementById('shopper-login-btn');
-  btn.textContent = isRegistering ? 'Create Account' : 'Sign In as Shopper';
-  btn.onclick = isRegistering ? handleShopperRegister : handleShopperLogin;
+  document.getElementById('shopper-login-btn').textContent = isRegistering ? 'Create Account' : 'Sign In as Shopper';
+  document.getElementById('shopper-login-btn').onclick = isRegistering ? handleShopperRegister : handleShopperLogin;
 }
 
 // ============================================================
@@ -598,11 +507,7 @@ async function handleShopperLogin() {
   errEl.style.display = 'none';
   const email = document.getElementById('login-email').value.trim();
   const password = document.getElementById('login-password').value;
-  if (!email || !password) {
-    errEl.textContent = 'Please enter email and password.';
-    errEl.style.display = 'block';
-    return;
-  }
+  if (!email || !password) { errEl.textContent = 'Please enter email and password.'; errEl.style.display = 'block'; return; }
   const btn = document.getElementById('shopper-login-btn');
   btn.textContent = 'Signing in…'; btn.disabled = true;
   try {
@@ -610,15 +515,8 @@ async function handleShopperLogin() {
     saveAuth(data.token, data.user);
     userRole = data.user.role;
     await routeByRole(data.user.role);
-  } catch(e) {
-    if (e.message !== 'Unauthorized') {
-      errEl.textContent = e.message;
-      errEl.style.display = 'block';
-    }
-  } finally {
-    btn.textContent = 'Sign In as Shopper';
-    btn.disabled = false;
-  }
+  } catch(e) { errEl.textContent = e.message; errEl.style.display = 'block'; }
+  finally { btn.textContent = 'Sign In as Shopper'; btn.disabled = false; }
 }
 
 async function handleShopperRegister() {
@@ -628,50 +526,17 @@ async function handleShopperRegister() {
   const email = document.getElementById('login-email').value.trim();
   const phone = document.getElementById('reg-phone').value.trim();
   const password = document.getElementById('login-password').value;
-  
-  if (!name || !email || !password) {
-    errEl.textContent = 'Name, email and password are required.';
-    errEl.style.display = 'block';
-    return;
-  }
-  
-  if (password.length < 6) {
-    errEl.textContent = 'Password must be at least 6 characters long.';
-    errEl.style.display = 'block';
-    return;
-  }
-  
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailPattern.test(email)) {
-    errEl.textContent = 'Please enter a valid email address.';
-    errEl.style.display = 'block';
-    return;
-  }
-  
+  if (!name || !email || !password) { errEl.textContent = 'Name, email and password are required.'; errEl.style.display = 'block'; return; }
   const btn = document.getElementById('shopper-login-btn');
   btn.textContent = 'Creating…'; btn.disabled = true;
   try {
-    await api('POST', '/api/auth/register', { 
-      name, 
-      email, 
-      phone: phone || undefined, 
-      password 
-    });
+    await api('POST', '/api/auth/register', { name, email, phone, password });
     showToast('✅ Account created! Please log in.');
     toggleRegister();
     document.getElementById('login-email').value = email;
     document.getElementById('login-password').value = '';
-    document.getElementById('reg-name').value = '';
-    document.getElementById('reg-phone').value = '';
-  } catch(e) {
-    if (e.message !== 'Unauthorized') {
-      errEl.textContent = e.message;
-      errEl.style.display = 'block';
-    }
-  } finally {
-    btn.textContent = 'Create Account';
-    btn.disabled = false;
-  }
+  } catch(e) { errEl.textContent = e.message; errEl.style.display = 'block'; }
+  finally { btn.textContent = 'Create Account'; btn.disabled = false; }
 }
 
 async function handleSupermarketAdminLogin() {
@@ -679,29 +544,18 @@ async function handleSupermarketAdminLogin() {
   errEl.style.display = 'none';
   const email = document.getElementById('admin-email').value.trim();
   const password = document.getElementById('admin-password').value;
-  if (!email || !password) {
-    errEl.textContent = 'Please enter email and password.';
-    errEl.style.display = 'block';
-    return;
-  }
+  if (!email || !password) { errEl.textContent = 'Please enter email and password.'; errEl.style.display = 'block'; return; }
   try {
     const data = await api('POST', '/api/auth/login', { email, password });
     if (!['admin','superadmin'].includes(data.user.role)) throw new Error('This account does not have admin access.');
     saveAuth(data.token, data.user);
     userRole = data.user.role;
-    const nameEl = document.getElementById('dashboard-supermarket-name');
-    if (nameEl && data.user.supermarketName) nameEl.textContent = data.user.supermarketName;
     await loadProducts();
-    await loadAdminDashboard();
+    await rahJ91ZuNL8Y2px8iYciYeHN8sfSh5eXH8();
     startAdminPolling();
     navTo('screen-supermarket-dashboard');
     showToast('Welcome Admin!');
-  } catch(e) {
-    if (e.message !== 'Unauthorized') {
-      errEl.textContent = e.message;
-      errEl.style.display = 'block';
-    }
-  }
+  } catch(e) { errEl.textContent = e.message; errEl.style.display = 'block'; }
 }
 
 async function handlePlatformLogin() {
@@ -709,11 +563,7 @@ async function handlePlatformLogin() {
   errEl.style.display = 'none';
   const email = document.getElementById('platform-email').value.trim();
   const password = document.getElementById('platform-master-password').value;
-  if (!email || !password) {
-    errEl.textContent = 'Please enter email and password.';
-    errEl.style.display = 'block';
-    return;
-  }
+  if (!email || !password) { errEl.textContent = 'Please enter email and password.'; errEl.style.display = 'block'; return; }
   try {
     const data = await api('POST', '/api/auth/login', { email, password });
     if (data.user.role !== 'superadmin') throw new Error('This account does not have platform owner access.');
@@ -722,38 +572,22 @@ async function handlePlatformLogin() {
     await renderPlatformDashboard();
     navTo('screen-platform-dashboard');
     showToast('Welcome Platform Owner!');
-  } catch(e) {
-    if (e.message !== 'Unauthorized') {
-      errEl.textContent = e.message;
-      errEl.style.display = 'block';
-    }
-  }
+  } catch(e) { errEl.textContent = e.message; errEl.style.display = 'block'; }
 }
 
-async function logout() {
+function logout() {
   stopAdminPolling();
-  if (currentSession && currentSession.sessionId) {
-    try {
-      await api('DELETE', '/api/sessions/' + currentSession.sessionId + '/cart');
-    } catch(e) { /* silent */ }
-  }
-  cart = [];
   clearAuthData();
+  cart = [];
+  updateCartUI();
   showToast('Logged out');
   navTo('screen-login');
 }
 
 // ============================================================
-// PLATFORM OWNER DASHBOARD - UPDATED with password handling
+// PLATFORM OWNER DASHBOARD
 // ============================================================
 async function renderPlatformDashboard() {
-  ['total-supermarkets','total-transactions','total-revenue','active-supermarkets'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = '…';
-  });
-  const container = document.getElementById('platform-supermarkets-list');
-  container.innerHTML = '<p class="text-gray-400 text-center py-4 animate-pulse">Loading supermarkets…</p>';
-
   try {
     const [storesRes, statsRes, kpiRes] = await Promise.all([
       api('GET', '/api/supermarkets'),
@@ -769,38 +603,34 @@ async function renderPlatformDashboard() {
     document.getElementById('total-revenue').textContent = (kpis.todayRevenue || 0).toLocaleString() + ' RWF';
     document.getElementById('active-supermarkets').textContent = stats.active || 0;
 
+    const container = document.getElementById('platform-supermarkets-list');
     if (!stores.length) {
       container.innerHTML = '<p class="text-gray-400 text-center py-4">No supermarkets yet</p>';
       return;
     }
-    
     container.innerHTML = stores.map(sup => `
       <div class="supermarket-card">
         <div class="flex justify-between items-start mb-3">
           <div class="flex-1">
-            <p class="font-bold text-gray-800 text-lg">${esc(sup.name)}</p>
-            <p class="text-xs text-gray-500">${esc(sup.city || sup.address || '')}</p>
-            <p class="text-xs text-gray-400">📧 ${esc(sup.email)}${sup.phone ? ' | 📞 ' + esc(sup.phone) : ''}</p>
-            ${sup.hasPassword ? '<p class="text-xs text-green-600 mt-1">✓ Admin credentials set</p>' : '<p class="text-xs text-orange-500 mt-1">⚠️ No password set</p>'}
+            <p class="font-bold text-gray-800 text-lg">${sup.name}</p>
+            <p class="text-xs text-gray-500">${sup.city || sup.address || ''}</p>
+            <p class="text-xs text-gray-400">${sup.email}${sup.phone ? ' | ' + sup.phone : ''}</p>
           </div>
           <div class="flex gap-2 items-center">
-            <span class="text-xs font-bold px-2 py-1 rounded-full ${sup.status === 'active' ? 'bg-green-100 text-green-600' : sup.status === 'suspended' ? 'bg-red-100 text-red-500' : 'bg-yellow-100 text-yellow-600'}">${esc(sup.status)}</span>
+            <span class="text-xs font-bold px-2 py-1 rounded-full ${sup.status === 'active' ? 'bg-green-100 text-green-600' : sup.status === 'suspended' ? 'bg-red-100 text-red-500' : 'bg-yellow-100 text-yellow-600'}">${sup.status}</span>
             ${sup.status === 'active'
-              ? `<button onclick="setSupermarketStatus('${esc(sup._id)}','suspended')" class="text-red-500 text-xs px-2 py-1 hover:bg-red-50 rounded">⏸ Suspend</button>`
-              : `<button onclick="setSupermarketStatus('${esc(sup._id)}','active')" class="text-green-500 text-xs px-2 py-1 hover:bg-green-50 rounded">▶ Activate</button>`
+              ? `<button onclick="setSupermarketStatus('${sup._id}','suspended')" class="text-red-500 text-xs px-2 py-1 hover:bg-red-50 rounded">⏸ Suspend</button>`
+              : `<button onclick="setSupermarketStatus('${sup._id}','active')" class="text-green-500 text-xs px-2 py-1 hover:bg-green-50 rounded">▶ Activate</button>`
             }
-            <button onclick="resetAdminPassword('${esc(sup._id)}', '${esc(sup.email)}')" class="text-blue-500 text-xs px-2 py-1 hover:bg-blue-50 rounded">🔑 Reset Password</button>
-            <button onclick="deleteSupermarket('${esc(sup._id)}')" class="text-red-500 text-xs px-2 py-1 hover:bg-red-50 rounded">🗑️</button>
+            <button onclick="deleteSupermarket('${sup._id}')" class="text-red-500 text-xs px-2 py-1 hover:bg-red-50 rounded">🗑️</button>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-2 pt-3 border-t">
           <div><p class="text-xs text-gray-500">Registered</p><p class="font-bold text-xs">${new Date(sup.createdAt).toLocaleDateString()}</p></div>
-          <div><p class="text-xs text-gray-500">Plan</p><p class="font-bold text-xs capitalize">${esc(sup.plan || 'free')}</p></div>
+          <div><p class="text-xs text-gray-500">Plan</p><p class="font-bold text-xs capitalize">${sup.plan || 'free'}</p></div>
         </div>
       </div>`).join('');
-  } catch(e) {
-    if (e.message !== 'Unauthorized') showToast('Error loading dashboard: ' + e.message);
-  }
+  } catch(e) { showToast('Error loading dashboard: ' + e.message); }
 }
 
 async function addSupermarket() {
@@ -810,146 +640,36 @@ async function addSupermarket() {
   const city = document.getElementById('new-sup-location').value.trim();
   const email = document.getElementById('new-sup-email').value.trim();
   const phone = document.getElementById('new-sup-phone').value.trim();
-  const password = document.getElementById('new-sup-password').value;
-  const confirmPassword = document.getElementById('new-sup-confirm-password').value;
-  
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
-  if (!name || !email) {
-    errEl.textContent = 'Supermarket name and admin email are required.';
-    errEl.style.display = 'block';
-    return;
-  }
-  
-  if (!emailPattern.test(email)) {
-    errEl.textContent = 'Please enter a valid email address.';
-    errEl.style.display = 'block';
-    return;
-  }
-  
-  if (!password) {
-    errEl.textContent = 'Admin password is required.';
-    errEl.style.display = 'block';
-    return;
-  }
-  
-  if (password.length < 6) {
-    errEl.textContent = 'Password must be at least 6 characters long.';
-    errEl.style.display = 'block';
-    return;
-  }
-  
-  if (password !== confirmPassword) {
-    errEl.textContent = 'Passwords do not match.';
-    errEl.style.display = 'block';
-    return;
-  }
-  
+  if (!name || !email) { errEl.textContent = 'Name and email are required.'; errEl.style.display = 'block'; return; }
   const btn = document.getElementById('add-sup-btn');
-  btn.textContent = 'Creating supermarket & admin account…'; btn.disabled = true;
-  
+  btn.textContent = 'Adding…'; btn.disabled = true;
   try {
-    // First create the supermarket
-    const supermarketData = await api('POST', '/api/supermarkets', { name, email, phone, city });
-    
-    // Then create the admin user with the password
-    await api('POST', '/api/auth/register-admin', {
-      email,
-      password,
-      name: `Admin - ${name}`,
-      supermarketId: supermarketData.supermarket._id,
-      role: 'admin'
-    });
-    
-    // Clear form
-    ['new-sup-name', 'new-sup-location', 'new-sup-email', 'new-sup-phone', 'new-sup-password', 'new-sup-confirm-password'].forEach(id => {
-      document.getElementById(id).value = '';
-    });
-    
-    // Show success with credentials
-    document.getElementById('credentials-info').style.display = 'block';
-    document.getElementById('cred-email').textContent = `Email: ${email}`;
-    document.getElementById('cred-password').textContent = `Password: ${password}`;
-    
-    showToast(`✅ ${name} registered successfully! Admin credentials created.`);
-    
-    // Hide credentials after 10 seconds
-    setTimeout(() => {
-      document.getElementById('credentials-info').style.display = 'none';
-    }, 10000);
-    
+    await api('POST', '/api/supermarkets', { name, email, phone, city });
+    ['new-sup-name','new-sup-location','new-sup-email','new-sup-phone'].forEach(id => document.getElementById(id).value = '');
+    showToast(name + ' added successfully!');
     await renderPlatformDashboard();
-  } catch(e) {
-    if (e.message !== 'Unauthorized') {
-      errEl.textContent = e.message;
-      errEl.style.display = 'block';
-    }
-  } finally {
-    btn.textContent = 'Register Supermarket →';
-    btn.disabled = false;
-  }
-}
-
-async function resetAdminPassword(supermarketId, adminEmail) {
-  const newPassword = prompt(`Enter new password for admin (${adminEmail}):\nPassword must be at least 6 characters.`);
-  
-  if (!newPassword) return;
-  
-  if (newPassword.length < 6) {
-    showToast('Password must be at least 6 characters long.');
-    return;
-  }
-  
-  try {
-    await api('POST', '/api/auth/reset-admin-password', {
-      email: adminEmail,
-      newPassword: newPassword,
-      supermarketId: supermarketId
-    });
-    showToast(`✅ Password reset for ${adminEmail}`);
-  } catch(e) {
-    if (e.message !== 'Unauthorized') showToast('Failed to reset password: ' + e.message);
-  }
+  } catch(e) { errEl.textContent = e.message; errEl.style.display = 'block'; }
+  finally { btn.textContent = 'Register Supermarket →'; btn.disabled = false; }
 }
 
 async function setSupermarketStatus(id, status) {
-  try {
-    await api('PATCH', '/api/supermarkets/' + id + '/status', { status });
-    await renderPlatformDashboard();
-    showToast('Status updated');
-  } catch(e) {
-    if (e.message !== 'Unauthorized') showToast('Failed: ' + e.message);
-  }
+  try { await api('PATCH', '/api/supermarkets/' + id + '/status', { status }); await renderPlatformDashboard(); showToast('Status updated'); }
+  catch(e) { showToast('Failed: ' + e.message); }
 }
 
 async function deleteSupermarket(id) {
-  if (!confirm('Delete this supermarket? This will also delete the admin account. This cannot be undone.')) return;
-  try {
-    await api('DELETE', '/api/supermarkets/' + id);
-    await renderPlatformDashboard();
-    showToast('Deleted successfully');
-  } catch(e) {
-    if (e.message !== 'Unauthorized') showToast('Failed: ' + e.message);
-  }
+  if (!confirm('Delete this supermarket? This cannot be undone.')) return;
+  try { await api('DELETE', '/api/supermarkets/' + id); await renderPlatformDashboard(); showToast('Deleted successfully'); }
+  catch(e) { showToast('Failed: ' + e.message); }
 }
 
 // ============================================================
 // SUPERMARKET ADMIN DASHBOARD
 // ============================================================
-function startAdminPolling() {
-  stopAdminPolling();
-  loadAdminDashboard();
-  adminPollInterval = setInterval(loadAdminDashboard, 4000);
-}
+function startAdminPolling() { stopAdminPolling(); adminPollInterval = setInterval(rahJ91ZuNL8Y2px8iYciYeHN8sfSh5eXH8, 4000); }
+function stopAdminPolling() { if (adminPollInterval) { clearInterval(adminPollInterval); adminPollInterval = null; } }
 
-function stopAdminPolling() {
-  if (adminPollInterval) {
-    clearInterval(adminPollInterval);
-    adminPollInterval = null;
-  }
-}
-
-async function loadAdminDashboard() {
+async function rahJ91ZuNL8Y2px8iYciYeHN8sfSh5eXH8() {
   try {
     const [kpiRes, liveRes, completedRes, alertsRes, invRes] = await Promise.all([
       api('GET', '/api/sessions/admin/kpis'),
@@ -964,28 +684,28 @@ async function loadAdminDashboard() {
     const alerts = alertsRes.alerts || [];
     const inventory = invRes.inventory || [];
 
+    // KPIs
     document.getElementById('daily-revenue').textContent = (kpis.todayRevenue || 0).toLocaleString() + ' RWF';
     document.getElementById('daily-transactions').textContent = kpis.completedToday || 0;
     document.getElementById('daily-items').textContent = kpis.totalItemsInCarts || 0;
     document.getElementById('avg-transaction').textContent = (kpis.liveValue || 0).toLocaleString() + ' RWF';
 
+    // Speed bar
     const active = kpis.activeShoppers || 0;
     document.getElementById('txn-per-hour').textContent = active;
     document.getElementById('speed-bar').style.width = Math.min(100, active * 10) + '%';
-    document.getElementById('speed-status').textContent =
-      active >= 10 ? '🚀 Very busy!' :
-      active >= 5  ? '⚡ Good activity' :
-      active > 0   ? '📊 Moderate traffic' : '⏰ No active shoppers';
+    document.getElementById('speed-status').textContent = active >= 10 ? '🚀 Very busy!' : active >= 5 ? '⚡ Good activity' : active > 0 ? '📊 Moderate traffic' : '⏰ No active shoppers';
 
+    // Live sessions
     const liveList = document.getElementById('today-transactions-list');
     liveList.innerHTML = !liveSessions.length
       ? '<p class="text-gray-400 text-center py-4">No active shoppers</p>'
       : liveSessions.map(s => `
           <div class="transaction-item">
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-start">
               <div>
-                <p class="font-semibold">${esc(s.shopperName)}</p>
-                <p class="text-xs text-gray-500">${s.totalItems || 0} items · ${esc(s.status)}</p>
+                <p class="font-semibold">${s.shopperName}</p>
+                <p class="text-xs text-gray-500">${s.totalItems || 0} items · ${s.status}</p>
               </div>
               <div class="text-right">
                 <p class="font-bold text-green-600">${(s.totalPrice || 0).toLocaleString()} RWF</p>
@@ -994,140 +714,96 @@ async function loadAdminDashboard() {
             </div>
           </div>`).join('');
 
+    // Completed
     const compList = document.getElementById('completed-sessions-list');
     compList.innerHTML = !completedSessions.length
       ? '<p class="text-gray-400 text-center py-4">No completed sessions yet</p>'
       : completedSessions.map(c => `
           <div class="transaction-item">
             <div class="flex justify-between">
-              <div>
-                <p class="font-semibold">${esc(c.shopperName)}</p>
-                <p class="text-xs text-gray-500">${esc(c.payment?.methodLabel || '—')} · ${esc(c.payment?.txnId || '—')}</p>
-              </div>
+              <div><p class="font-semibold">${c.shopperName}</p><p class="text-xs text-gray-500">${c.payment?.methodLabel || '—'} · ${c.payment?.txnId || '—'}</p></div>
               <p class="font-bold text-green-600">${(c.payment?.total || 0).toLocaleString()} RWF</p>
             </div>
           </div>`).join('');
 
+    // Alerts
     document.getElementById('admin-alert-count').textContent = alerts.length;
     const alertsList = document.getElementById('admin-alerts-list');
     alertsList.innerHTML = !alerts.length
       ? '<p class="text-gray-400 text-center py-2">No alerts</p>'
       : alerts.map(a => `
           <div class="flex gap-3 p-3 bg-red-50 rounded-xl">
-            <span class="text-xl">${esc(a.icon)}</span>
-            <div class="flex-1"><p class="font-semibold text-sm">${esc(a.title)}</p><p class="text-xs text-gray-500">${esc(a.detail)}</p></div>
-            <span class="text-xs text-gray-400">${esc(a.time)}</span>
+            <span class="text-xl">${a.icon}</span>
+            <div class="flex-1"><p class="font-semibold text-sm">${a.title}</p><p class="text-xs text-gray-500">${a.detail}</p></div>
+            <span class="text-xs text-gray-400">${a.time}</span>
           </div>`).join('');
 
+    // Inventory
     const invList = document.getElementById('admin-inventory-list');
     invList.innerHTML = !inventory.length
       ? '<p class="text-gray-400 text-center py-4">No items scanned yet</p>'
       : inventory.map(item => `
           <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-            <span class="text-2xl">${esc(item.product.emoji)}</span>
+            <span class="text-2xl">${item.product.emoji}</span>
             <div class="flex-1">
-              <p class="font-semibold text-sm">${esc(item.product.name)}</p>
+              <p class="font-semibold text-sm">${item.product.name}</p>
               <div class="w-full bg-gray-200 rounded-full h-1.5 mt-1">
-                <div class="bg-green-500 h-1.5 rounded-full" style="width:${inventory[0] ? Math.min(100, Math.round(item.qty / inventory[0].qty * 100)) : 0}%"></div>
+                <div class="bg-green-500 h-1.5 rounded-full" style="width:${inventory[0] ? Math.round(item.qty/inventory[0].qty*100) : 0}%"></div>
               </div>
             </div>
             <div class="text-right"><p class="font-bold">${item.qty}</p><p class="text-xs text-gray-500">units</p></div>
-            <div class="text-right"><p class="font-bold text-green-600 text-sm">${item.revenue >= 1000 ? (item.revenue / 1000).toFixed(1) + 'k' : item.revenue} RWF</p></div>
+            <div class="text-right"><p class="font-bold text-green-600 text-sm">${item.revenue >= 1000 ? (item.revenue/1000).toFixed(1)+'k' : item.revenue} RWF</p></div>
           </div>`).join('');
-  } catch(e) {
-    if (e.message !== 'Unauthorized') console.warn('Admin dashboard error:', e.message);
-  }
+  } catch(e) { console.warn('Admin dashboard error:', e.message); }
 }
 
 // ============================================================
-// STORES - Load active supermarkets
+// STORES - FIXED: Now properly displays all active supermarkets added by platform admin
 // ============================================================
 async function loadStores() {
   try {
-    console.log('🔄 Loading supermarkets for shopper...');
     const data = await api('GET', '/api/supermarkets');
-    console.log('📦 Raw API response:', data);
-    
-    const allSupermarkets = data.supermarkets || [];
-    console.log('🏪 All supermarkets:', allSupermarkets.length);
-    
-    allStores = allSupermarkets.filter(s => s.status === 'active');
-    console.log('✅ Active supermarkets:', allStores.length);
-    
-    if (allStores.length === 0 && allSupermarkets.length > 0) {
-      console.log('📋 Supermarket statuses:', allSupermarkets.map(s => ({ name: s.name, status: s.status })));
+    // Critical fix: Include ALL active supermarkets, not just hardcoded fallback
+    allStores = (data.supermarkets || []).filter(s => s.status === 'active');
+    if (allStores.length === 0) {
+      // Only show fallback if truly no active stores exist
+      console.log('No active supermarkets found from API');
     }
-    
-    return allStores;
   } catch(e) {
-    console.error('❌ Failed to load stores:', e);
-    if (e.message !== 'Unauthorized') {
-      showToast('Error loading supermarkets: ' + e.message);
-    }
-    allStores = [];
-    return [];
+    console.error('Failed to load stores:', e.message);
+    allStores = []; // Empty array, no fallback hardcoded store
   }
 }
 
 function renderSupermarketsList(query) {
+  const filtered = query
+    ? allStores.filter(s => s.name.toLowerCase().includes(query.toLowerCase()) || (s.city||'').toLowerCase().includes(query.toLowerCase()))
+    : allStores;
   const container = document.getElementById('supermarkets-list');
   if (!container) return;
-  
-  console.log('🎨 Rendering supermarkets, total active stores:', allStores.length);
-  
-  const filtered = query && query.trim() !== ''
-    ? allStores.filter(s =>
-        s.name.toLowerCase().includes(query.toLowerCase()) ||
-        (s.city || '').toLowerCase().includes(query.toLowerCase()))
-    : allStores;
-  
-  if (!filtered.length) {
-    if (allStores.length === 0) {
-      container.innerHTML = `
-        <div class="text-center py-12 text-gray-500 bg-gray-50 rounded-2xl">
-          <div class="text-6xl mb-4">🏪</div>
-          <p class="text-lg font-medium">No supermarkets available yet.</p>
-          <p class="text-sm mt-2">Check back later!</p>
-        </div>`;
-    } else {
-      container.innerHTML = `
-        <div class="text-center py-12 text-gray-500 bg-gray-50 rounded-2xl">
-          <div class="text-6xl mb-4">🔍</div>
-          <p class="text-lg font-medium">No supermarkets match your search.</p>
-          <button onclick="document.getElementById('store-search').value='';filterStores()" class="mt-4 text-[#00C566] font-semibold underline">Clear Search</button>
-        </div>`;
-    }
+  if (filtered.length === 0) {
+    container.innerHTML = '<div class="text-center py-8 text-gray-500 bg-gray-50 rounded-2xl">🏪 No supermarkets available yet.<br>Check back later!</div>';
     return;
   }
-  
   container.innerHTML = filtered.map(sup => `
-    <div class="supermarket-card" onclick="selectSupermarket('${esc(sup._id)}')">
+    <div class="supermarket-card" onclick="selectSupermarket('${sup._id}')">
       <div class="flex items-center gap-3">
-        <div class="w-14 h-14 bg-gradient-to-br from-[#005a64] to-[#00C566] rounded-xl flex items-center justify-center text-3xl shadow-md">
-          ${sup.logo || '🏪'}
-        </div>
-        <div class="flex-1">
-          <p class="font-bold text-gray-800 text-lg">${esc(sup.name)}</p>
-          <p class="text-sm text-gray-600">📍 ${esc(sup.city || sup.address || 'Rwanda')}</p>
-          <span class="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full mt-1 inline-block">✓ Open</span>
-        </div>
+        <div class="w-12 h-12 bg-gradient-to-br from-[#005a64] to-[#00C566] rounded-xl flex items-center justify-center text-2xl">${sup.logo || '🏪'}</div>
+        <div class="flex-1"><p class="font-bold">${sup.name}</p><p class="text-xs text-gray-500">📍 ${sup.city || 'Rwanda'}</p></div>
         <div class="text-2xl text-gray-400">→</div>
       </div>
     </div>`).join('');
 }
 
 function filterStores() {
-  const searchInput = document.getElementById('store-search');
-  if (searchInput) {
-    renderSupermarketsList(searchInput.value);
-  }
+  renderSupermarketsList(document.getElementById('store-search').value);
 }
 
 function selectSupermarket(storeId) {
   currentSupermarket = allStores.find(s => s._id === storeId);
   if (currentSupermarket) {
     localStorage.setItem('sg_store', JSON.stringify(currentSupermarket));
-    showToast(`🛒 Shopping at ${currentSupermarket.name}`);
+    showToast('Shopping at ' + currentSupermarket.name);
     startShopping();
   } else {
     showToast('Store not found');
@@ -1137,8 +813,7 @@ function selectSupermarket(storeId) {
 function updateUserAvatar() {
   const el = document.getElementById('user-avatar');
   if (el && currentUser) {
-    const initial = currentUser.name?.charAt(0)?.toUpperCase() || '👤';
-    el.textContent = currentUser.avatar || initial;
+    el.textContent = currentUser.avatar || currentUser.name?.charAt(0)?.toUpperCase() || '👤';
   }
 }
 
@@ -1149,57 +824,33 @@ async function loadProducts() {
   try {
     const d = await api('GET', '/api/products');
     PRODUCTS = d.products || [];
-  } catch(e) {
-    if (e.message !== 'Unauthorized') console.warn('Products failed:', e.message);
-    PRODUCTS = [];
-  }
+  } catch(e) { console.warn('Products failed:', e.message); }
 }
 
 function loadProductsUI() {
   const container = document.getElementById('demo-products');
   if (!container) return;
-  
-  if (!PRODUCTS.length) {
-    container.innerHTML = '<p class="text-gray-400 text-center col-span-2">No products available</p>';
-    return;
-  }
-  
-  container.innerHTML = PRODUCTS.slice(0, 6).map(p => `
-    <button onclick="addToCart('${esc(p.id)}','${esc(p.name)}',${p.price},'${p.emoji}',${p.weight})"
-            class="bg-gray-800 p-4 rounded-xl text-left hover:bg-gray-700 transition active:scale-95">
+  container.innerHTML = PRODUCTS.map(p => `
+    <button onclick="addToCart('${p.id}','${p.name}',${p.price},'${p.emoji}',${p.weight})"
+            class="bg-gray-800 p-4 rounded-xl text-left hover:bg-gray-700 transition">
       <div class="text-3xl mb-2">${p.emoji}</div>
-      <div class="text-white text-sm font-semibold truncate">${esc(p.name)}</div>
-      <div class="text-green-400 text-xs font-bold">${p.price.toLocaleString()} RWF</div>
+      <div class="text-white text-sm font-semibold">${p.name}</div>
+      <div class="text-green-400 text-xs">${p.price.toLocaleString()} RWF</div>
     </button>`).join('');
-}
-
-function submitManualBarcode() {
-  const input = document.getElementById('manual-barcode');
-  const barcode = input.value.trim();
-  if (!barcode) { showToast('Please enter a barcode'); return; }
-  const product = PRODUCTS.find(p => p.barcode === barcode || p.id === barcode);
-  if (!product) { showToast('Product not found'); return; }
-  addToCart(product.id, product.name, product.price, product.emoji, product.weight);
-  input.value = '';
 }
 
 // ============================================================
 // SESSION
 // ============================================================
 async function ensureSession() {
-  try {
-    const d = await api('GET', '/api/sessions/mine');
-    currentSession = d.session;
-  } catch {
-    const d = await api('POST', '/api/sessions/start');
-    currentSession = d.session;
-  }
+  try { const d = await api('GET', '/api/sessions/mine'); currentSession = d.session; }
+  catch { const d = await api('POST', '/api/sessions/start'); currentSession = d.session; }
   syncCartFromSession();
 }
 
 function syncCartFromSession() {
   if (!currentSession) { cart = []; return; }
-  cart = (currentSession.items || []).map(i => ({
+  cart = currentSession.items.map(i => ({
     id: i.productSnapshot.id,
     name: i.productSnapshot.name,
     price: i.productSnapshot.price,
@@ -1218,16 +869,15 @@ function startShopping() {
 }
 
 async function addToCart(productId, name, price, emoji, weight) {
-  if (cartSyncing) { showToast('Please wait…'); return; }
-
+  // Optimistic update
   const existing = cart.find(i => i.id === productId);
   if (existing) { existing.quantity++; } else { cart.push({ id: productId, name, price, emoji, weight, quantity: 1 }); }
   updateCartUI();
-  showToast(`${emoji} ${name} added!`);
+  showToast(emoji + ' ' + name + ' added!');
   setTimeout(() => navTo('screen-cart'), 500);
 
+  // Sync to backend
   if (!currentSession) return;
-  cartSyncing = true;
   try {
     const data = await api('POST', '/api/sessions/' + currentSession.sessionId + '/scan', { productId });
     currentSession = data.session;
@@ -1235,14 +885,8 @@ async function addToCart(productId, name, price, emoji, weight) {
     updateCartUI();
   } catch(e) {
     const idx = cart.findIndex(i => i.id === productId);
-    if (idx !== -1) {
-      cart[idx].quantity--;
-      if (cart[idx].quantity <= 0) cart.splice(idx, 1);
-    }
+    if (idx !== -1) { cart[idx].quantity--; if (cart[idx].quantity <= 0) cart.splice(idx, 1); }
     updateCartUI();
-    if (e.message !== 'Unauthorized') showToast('Failed to add item: ' + e.message);
-  } finally {
-    cartSyncing = false;
   }
 }
 
@@ -1255,7 +899,7 @@ function updateQuantity(productId, delta) {
   if (!currentSession) return;
   api('PATCH', '/api/sessions/' + currentSession.sessionId + '/item', { productId, delta })
     .then(d => { currentSession = d.session; syncCartFromSession(); updateCartUI(); })
-    .catch(e => { if (e.message !== 'Unauthorized') console.warn('Qty sync:', e.message); });
+    .catch(e => console.warn('Qty sync:', e.message));
 }
 
 async function clearCart() {
@@ -1263,18 +907,8 @@ async function clearCart() {
   updateCartUI();
   showToast('Cart cleared');
   if (!currentSession) return;
-  try {
-    await api('DELETE', '/api/sessions/' + currentSession.sessionId + '/cart');
-    const d = await api('GET', '/api/sessions/mine');
-    currentSession = d.session;
-  } catch(e) {
-    try {
-      const d = await api('POST', '/api/sessions/start');
-      currentSession = d.session;
-    } catch(err) {
-      if (err.message !== 'Unauthorized') console.warn('Session restart failed:', err.message);
-    }
-  }
+  try { const d = await api('DELETE', '/api/sessions/' + currentSession.sessionId + '/cart'); currentSession = d.session; }
+  catch(e) { console.warn(e.message); }
 }
 
 function continueShopping() { navTo('screen-scan'); }
@@ -1300,15 +934,12 @@ function updateCartUI() {
     <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl">
       <div class="flex items-center gap-3">
         <span class="text-3xl">${item.emoji}</span>
-        <div>
-          <p class="font-semibold">${esc(item.name)}</p>
-          <p class="text-xs text-gray-500">${item.price.toLocaleString()} RWF</p>
-        </div>
+        <div><p class="font-semibold">${item.name}</p><p class="text-xs text-gray-500">${item.price.toLocaleString()} RWF</p></div>
       </div>
       <div class="flex items-center gap-3">
-        <button onclick="updateQuantity('${esc(item.id)}',-1)" class="w-8 h-8 bg-gray-200 rounded-full font-bold hover:bg-gray-300">-</button>
+        <button onclick="updateQuantity('${item.id}',-1)" class="w-8 h-8 bg-gray-200 rounded-full font-bold">-</button>
         <span class="font-bold w-6 text-center">${item.quantity}</span>
-        <button onclick="updateQuantity('${esc(item.id)}',1)" class="w-8 h-8 bg-gray-200 rounded-full font-bold hover:bg-gray-300">+</button>
+        <button onclick="updateQuantity('${item.id}',1)" class="w-8 h-8 bg-gray-200 rounded-full font-bold">+</button>
         <span class="font-bold w-24 text-right">${(item.price * item.quantity).toLocaleString()} RWF</span>
       </div>
     </div>`).join('');
@@ -1325,10 +956,7 @@ function proceedToCheckout() {
   if (!cart.length) { showToast('Cart is empty'); return; }
   const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
   document.getElementById('checkout-items').innerHTML = cart.map(item =>
-    `<div class="flex justify-between text-sm py-2">
-       <span>${esc(item.emoji)} ${esc(item.name)} x${item.quantity}</span>
-       <span>${(item.price * item.quantity).toLocaleString()} RWF</span>
-     </div>`
+    `<div class="flex justify-between text-sm py-2"><span>${item.emoji} ${item.name} x${item.quantity}</span><span>${(item.price * item.quantity).toLocaleString()} RWF</span></div>`
   ).join('');
   document.getElementById('checkout-total').textContent = total.toLocaleString() + ' RWF';
   navTo('screen-checkout');
@@ -1338,71 +966,41 @@ function selectPayment(method, element) {
   selectedPayment = method;
   document.querySelectorAll('.payment-option').forEach(el => {
     el.classList.remove('border-[#00C566]', 'bg-green-50');
-    const dot = el.querySelector('.payment-dot');
+    const dot = el.querySelector('.rounded-full');
     if (dot) { dot.classList.remove('bg-[#00C566]'); dot.classList.add('border-gray-300', 'border-2'); }
   });
   element.classList.add('border-[#00C566]', 'bg-green-50');
-  const dot = element.querySelector('.payment-dot');
+  const dot = element.querySelector('.rounded-full');
   if (dot) { dot.classList.add('bg-[#00C566]'); dot.classList.remove('border-gray-300', 'border-2'); }
 }
 
 async function processPayment() {
   if (!currentSession || !cart.length) { showToast('Cart is empty'); return; }
-  const phone = document.getElementById('payment-phone').value.trim();
-
-  if (['momo', 'airtel'].includes(selectedPayment)) {
-    const phonePattern = /^07[0-9]{8}$/;
-    if (!phone || !phonePattern.test(phone)) {
-      showToast('Please enter a valid phone number (e.g. 0781234567)');
-      document.getElementById('payment-phone').focus();
-      return;
-    }
-  }
-
-  const payBtn = document.querySelector('#screen-checkout .btn-green');
-  if (payBtn) { payBtn.textContent = 'Processing…'; payBtn.disabled = true; }
+  const phone = document.getElementById('payment-phone').value || '';
   showToast('Processing payment...');
-
   try {
-    const data = await api('POST', '/api/sessions/' + currentSession.sessionId + '/checkout', {
-      method: selectedPayment,
-      phone
-    });
+    const data = await api('POST', '/api/sessions/' + currentSession.sessionId + '/checkout', { method: selectedPayment, phone });
     const txnId = data.txnId;
-
-    let confirmed = false;
-    for (let attempt = 0; attempt < 8; attempt++) {
-      await new Promise(r => setTimeout(r, 1500));
+    setTimeout(async () => {
       try {
-        const result = await api('POST', '/api/sessions/' + currentSession.sessionId + '/confirm');
-        currentSession = result.session;
+        const confirmed = await api('POST', '/api/sessions/' + currentSession.sessionId + '/confirm');
+        currentSession = confirmed.session;
         document.getElementById('receipt-code').textContent = txnId;
-        cart = [];
-        updateCartUI();
+        cart = []; updateCartUI();
         navTo('screen-success');
-        confirmed = true;
-        break;
-      } catch(e) {
-        if (e.message === 'Unauthorized') break;
-        if (attempt === 7) showToast('Payment confirmation timed out. Please check with staff.');
-      }
-    }
-  } catch(e) {
-    if (e.message !== 'Unauthorized') showToast('Checkout failed: ' + e.message);
-  } finally {
-    if (payBtn) { payBtn.textContent = 'Pay Now →'; payBtn.disabled = false; }
-  }
+      } catch(e) { showToast('Payment failed: ' + e.message); }
+    }, 2000);
+  } catch(e) { showToast('Checkout failed: ' + e.message); }
 }
 
 async function resetAndGoHome() {
-  try {
-    const d = await api('POST', '/api/sessions/start');
-    currentSession = d.session;
-  } catch(e) {
-    currentSession = null;
-  }
+  try { const d = await api('POST', '/api/sessions/start'); currentSession = d.session; } catch(e) { currentSession = null; }
   navTo('screen-stores');
 }
+
+// ============================================================
+// FLOATING CART BUTTON - REMOVED (no function added)
+// ============================================================
 
 // ============================================================
 // NAVIGATION & UTILITIES
@@ -1412,9 +1010,7 @@ function navTo(screenId) {
   const el = document.getElementById(screenId);
   if (el) el.classList.add('active-screen');
   if (screenId === 'screen-cart') updateCartUI();
-  if (screenId === 'screen-supermarket-dashboard') {
-    startAdminPolling();
-  }
+  if (screenId === 'screen-supermarket-dashboard') { rahJ91ZuNL8Y2px8iYciYeHN8sfSh5eXH8(); startAdminPolling(); }
   if (screenId !== 'screen-supermarket-dashboard') stopAdminPolling();
   if (screenId === 'screen-stores') {
     loadStores().then(() => renderSupermarketsList());
@@ -1422,7 +1018,8 @@ function navTo(screenId) {
 }
 
 function showToast(message) {
-  document.querySelectorAll('.toast').forEach(t => t.remove());
+  const existing = document.querySelectorAll('.toast');
+  existing.forEach(t => t.remove());
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.textContent = message;

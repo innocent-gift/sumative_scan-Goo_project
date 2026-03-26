@@ -5,4 +5,4 @@ module.exports = mongoose.model('Alert', new mongoose.Schema({
   detail: String,
   icon: String,
   time: String
-}));
+}, { timestamps: true }));
