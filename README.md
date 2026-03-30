@@ -3,6 +3,9 @@
 A full-stack web application that enables shoppers to scan and purchase products in supermarkets, while giving supermarket admins and platform owners real-time dashboards to monitor activity.
 
 **Live Demo:** https://sumative-scan-goo-project-2.onrender.com
+**Youtube Link:** https://youtu.be/fBl1lAlc1L8
+**SRC Document:** https://docs.google.com/document/d/1InbPerpz0U9scq47MXQ311XIAM8gi7mXe5doTWsXFqY/edit?tab=t.0
+**You can access the frontend here:** https://scanndgo.netlify.app/
 
 ---
 
@@ -11,7 +14,7 @@ A full-stack web application that enables shoppers to scan and purchase products
 ### Shopper
 - Register and log in
 - Browse available supermarkets
-- Add products to cart and manage quantities
+- Add products to the cart and manage quantities
 - Checkout with MTN Mobile Money, Airtel Money, or Cash
 - Forgot password / reset password with a 6-digit code
 
