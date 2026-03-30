@@ -68,6 +68,50 @@ router.post('/reset-admin-password', auth, async (req, res) => {
   }
 });
 
+// Forgot password — generates a reset token (no email needed, token shown directly)
+router.post('/forgot-password', async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ message: 'Email is required.' });
+
+    const user = await User.findOne({ email });
+    // Always return success to avoid email enumeration
+    if (!user) return res.json({ message: 'If that email exists, a reset code was generated.' });
+
+    const token = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit code
+    user.resetToken = token;
+    user.resetTokenExpiry = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
+    await user.save();
+
+    // In production you'd email this. For now return it directly.
+    res.json({ message: 'Reset code generated.', resetCode: token });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Reset password using the 6-digit code
+router.post('/reset-password', async (req, res) => {
+  try {
+    const { email, resetCode, newPassword } = req.body;
+    if (!email || !resetCode || !newPassword) return res.status(400).json({ message: 'Email, reset code and new password are required.' });
+    if (newPassword.length < 6) return res.status(400).json({ message: 'Password must be at least 6 characters.' });
+
+    const user = await User.findOne({ email, resetToken: resetCode });
+    if (!user) return res.status(400).json({ message: 'Invalid reset code.' });
+    if (user.resetTokenExpiry < new Date()) return res.status(400).json({ message: 'Reset code has expired. Please request a new one.' });
+
+    user.password = await bcrypt.hash(newPassword, 10);
+    user.resetToken = null;
+    user.resetTokenExpiry = null;
+    await user.save();
+
+    res.json({ message: 'Password reset successfully. You can now log in.' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // Login (all roles)
 router.post('/login', async (req, res) => {
   try {
